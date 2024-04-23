@@ -37,12 +37,9 @@ Welcome to Lq's Bookstore Management System! This program allows administrators 
 - Python 3.x
 - `tabulate` library (install via `pip install tabulate`)
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Author
 
-- [Your Name](https://github.com/yourusername)
+- [Luqman Ilman Muhammad](https://github.com/luqmanilman)
 
-Feel free to contribute to the project by submitting bug reports, feature requests, or pull requests!
+
