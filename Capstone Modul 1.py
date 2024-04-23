@@ -50,7 +50,7 @@ def display_item_list(items):
     headers = ["Index", "Name", "Stock", "Price"]
     data = [[i, item['Name'], item['Stock'], f"Rp {item['Price']}"] for i, item in enumerate(items)]
     print(tabulate(data, headers=headers, tablefmt="heavy_outline"))
-
+#Add item Function
 def add_item():
     name_item = input('Enter the name of item (or type "cancel" to cancel): ')
     
@@ -59,7 +59,7 @@ def add_item():
         print("Adding item canceled.")
         return
     
-    try:
+    try: #Checking the input must be integer
         stock = int(input('Enter the amount of Stock: '))
         if stock < 0:
             print("Stock must be greater than or equal to 0.")
@@ -82,18 +82,18 @@ def add_item():
     except ValueError:
         print("Invalid input! Stock and Price must be integers.")
 
-def remove_item():
+def remove_item(): #Remove item function
     display_item_list(Store_items)
     choice = input('Enter the index or name of the item you want to delete: ')
     
-    try:
+    try: #Trying to delete by index
         index = int(choice)
         if 0 <= index < len(Store_items):
             del Store_items[index]
             print('Item successfully deleted by index!')
         else:
             print("Index out of range! Please enter a valid index.")
-    except ValueError:
+    except ValueError: #Deleted by name
         found_items = [item for item in Store_items if item['Name'].lower() == choice.lower()]
         if found_items:
             if len(found_items) == 1:
@@ -104,7 +104,7 @@ def remove_item():
         else:
             print("No item found with that name.")
 
-def update_item():
+def update_item(): #Update function
     display_item_list(Store_items)
     choice = input('Enter the index or name of the item you want to update: ')
     
@@ -148,16 +148,16 @@ def update_item():
         else:
             print("No item found with that name.")
 
-def buy_item():
+def buy_item(): #Buy function
     display_item_list(Store_items)
-    cart = []
+    cart = [] #empty/blank list cart
     total_price = 0
 
     while True:
         choice = input('Enter index or name of the item you want to buy (input 99 to finish Shopping): ')
         if choice == '99':
             break
-        try:
+        try: #Checking for value must greater or equal to 0
             index = int(choice)
             if 0 <= index < len(Store_items):
                 while True:
@@ -225,10 +225,10 @@ def buy_item():
         print(f"Thank you! Your change is: Rp {change}")
     else:
         print("Thank you!")
-
+#Function for sorting item
 def sort_items():
     sort_choice = input("Sort Stock (name, stock, price): ").lower()
-    if sort_choice == "name":
+    if sort_choice == "name": #Sorting by name
         sub_sort_choice = input("Select order (1. A-Z, 2. Z-A): ")
         if sub_sort_choice == "1":
             sorted_items = sorted(Store_items, key=lambda x: x['Name'])
@@ -237,7 +237,7 @@ def sort_items():
         else:
             print("Invalid choice.")
             return
-    elif sort_choice == "stock":
+    elif sort_choice == "stock": #Sorting by stock
         sub_sort_choice = input("Select order (1. Ascending, 2. Descending): ")
         if sub_sort_choice == "1":
             sorted_items = sorted(Store_items, key=lambda x: x['Stock'])
@@ -246,7 +246,7 @@ def sort_items():
         else:
             print("Invalid choice.")
             return
-    elif sort_choice == "price":
+    elif sort_choice == "price": #Sorting by price
         sub_sort_choice = input("Select order (1. Ascending, 2. Descending): ")
         if sub_sort_choice == "1":
             sorted_items = sorted(Store_items, key=lambda x: x['Price'])
@@ -260,9 +260,10 @@ def sort_items():
         return
     display_item_list(sorted_items)
 
+#Function for search the item in the table 
 def search_item_by_name():
     search_term = input("Enter the name of the item you want to search for: ").lower()
-    found_items = [item for item in Store_items if search_term in item['Name'].lower()]
+    found_items = [item for item in Store_items if search_term in item['Name'].lower()] 
     if found_items:
         display_item_list(found_items)
     else:
@@ -271,6 +272,7 @@ def search_item_by_name():
 def search_item():
     search_item_by_name()
 
+#function for checking integer
 def get_integer_input(prompt):
     while True:
         try:
@@ -310,15 +312,15 @@ Are you an Admin or a User? (Admin/User): ''').lower()
             if is_admin:
                 pilihan = get_integer_input('Enter your menu choice : ')
                 if pilihan == 1:
-                    display_item_list(Store_items)
+                    display_item_list(Store_items) # Call display item for both admin and user
                 elif pilihan == 2:
-                    add_item()
+                    add_item() #Call add item function for admin
                 elif pilihan == 3:
-                    remove_item()
+                    remove_item() #call remove function for admin
                 elif pilihan == 4:
-                    update_item()
+                    update_item() #Call update function for admin
                 elif pilihan == 5:
-                    sort_items()
+                    sort_items() #Call Sort function for both admin and user
                 elif pilihan == 6:
                     search_item()  # Call the search_item function for both admin and user
                 elif pilihan == 7:
@@ -331,15 +333,15 @@ Are you an Admin or a User? (Admin/User): ''').lower()
             else:
                 pilihan = get_integer_input('Enter your menu choice : ')
                 if pilihan == 1:
-                    display_item_list(Store_items)
+                    display_item_list(Store_items) # Call display item for both admin and user
                 elif pilihan == 2:
-                    buy_item()
+                    buy_item() # Call buy function for user 
                 elif pilihan == 3:
-                    sort_items()
+                    sort_items() #Call Sort function for both admin and user
                 elif pilihan == 4:
                     search_item()  # Call the search_item function for both admin and user
                 elif pilihan == 5:
-                    break
+                    break # Go back to the admin/user selection
                 elif pilihan == 6:
                     print('Thank you for using this program!')
                     return
