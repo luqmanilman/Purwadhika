@@ -34,7 +34,7 @@ Welcome to Lq's Bookstore Management System! This program allows administrators 
 
 ## Requirements
 
-- Python 3.x
+- Python 3.11.7
 - `tabulate` library (install via `pip install tabulate`)
 
 
